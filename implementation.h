@@ -2,24 +2,17 @@
 #include <cstdint>
 #include <windows.h>
 
-class TimeMeter{
+class TimeMeterImplementation{
 public:
-    TimeMeter(unsigned count);
 
-    void setTimeStamp(unsigned num);
+    virtual void setTimeStamp(unsigned num) = 0;
 
-    double getSTimeStamp(unsigned num);
-    int64_t getMSTimeStamp(unsigned num);
+    virtual double getSTimeStamp(unsigned num) = 0;
+    virtual int64_t getMSTimeStamp(unsigned num) = 0;
 
-    double getSDiff (unsigned first, unsigned second);
-    int64_t getMSDiff (unsigned first, unsigned second);
+    virtual double getSDiff (unsigned first, unsigned second) = 0;
+    virtual int64_t getMSDiff (unsigned first, unsigned second) = 0;
     
-    bool isLess(unsigned first, unsigned second, int64_t expected);
-    bool isLess(unsigned first, int64_t expected);
-
-private:
-    unsigned _count;
-    LARGE_INTEGER _start;
-    LARGE_INTEGER* _TimeStamps;
-    LARGE_INTEGER _frequency;
+    virtual bool isLess(unsigned first, unsigned second, int64_t expected) = 0;
+    virtual bool isLess(unsigned first, int64_t expected) = 0;
 };
